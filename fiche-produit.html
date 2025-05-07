@@ -1,0 +1,984 @@
+  <!DOCTYPE html>
+  <html lang="fr">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+      <title>Ventilateur USB Mini Zéphyr | Zéphyr Store</title>
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <style>
+
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+        :root {
+      --bleu-principal: #00CFC1;
+      --jaune-soleil: #FFD93D;
+      --corail: #FF6B6B;
+      --sable: #FFF4E0;
+      --texte-fonce: #333;
+    }
+
+    html, body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--sable);
+      color: var(--texte-fonce);
+    }
+
+    header {
+      background: linear-gradient(to right, #85c4e0, #f2e4d5);
+      padding: 20px 10px;
+      text-align: center;
+      color: #fff;
+    }
+
+        .logo {
+      font-size: 30px;
+      font-weight: bold;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    body {
+  overflow-x: hidden; /* Empêche le défilement horizontal global */
+}
+
+      nav {
+      background: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--texte-fonce);
+      font-weight: bold;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      list-style: none;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      z-index: 999;
+    }
+
+    .dropdown-menu li {
+      padding: 8px 20px;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+      
+   .search-bar {
+      display: flex;
+      align-items: center;
+      background: #f0f0f0;
+      border-radius: 30px;
+      padding: 5px 10px;
+      margin-right: 15px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 5px 10px;
+      background: transparent;
+    }
+
+    .search-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--texte-fonce);
+      font-size: 16px;
+    }
+
+    .account-cart {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+  /* Bouton Mon compte corrigé */
+    .account-btn {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: var(--corail);
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      line-height: 1;
+    }
+
+    .account-btn i {
+  margin-top: 4px;                /* remonte légèrement l’icône */
+  font-size: 1.2rem;
+}
+    .account-text {
+  display: flex;
+  flex-direction: column;          /* empilement vertical */
+  line-height: 1;                  /* contrôle l’interligne */
+}
+.main-label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.sub-label {
+  font-size: 0.75rem;              /* plus petit que le titre */
+  color: #fff;                     /* ou var(--sable) si vous préférez */
+  margin-top: 2px;                 /* un petit écart */
+  /* pour que le texte suive exactement le M */
+  text-align: left;
+}
+
+
+    .account-btn:hover {
+      background: #e95a5a;
+    }
+
+    /* Bouton Panier */
+    .cart-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: var(--corail);
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      position: relative;
+      line-height: 1;
+    }
+    .cart-btn i {
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .cart-btn:hover {
+      background: #e95a5a;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: 5px;
+      transform: translate(50%, -50%);
+      background-color: var(--jaune-soleil);
+      color: black;
+      font-size: 12px;
+      padding: 3px 7px;
+      border-radius: 50%;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+        /* ========== STYLES PANIER ========== */
+
+/* Compteur flottant sur le bouton Panier */
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: 5px;
+  transform: translate(50%, -50%);
+  background-color: var(--jaune-soleil);
+  color: #000;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 50%;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Conteneur relatif pour aligner le dropdown */
+.account-cart {
+  position: relative;
+}
+
+
+/* Conteneur principal du panier */
+
+.recapitulatif-panier {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 320px;
+  max-height: 70vh;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  display: none;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Liste des articles */
+.recapitulatif-panier ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Article individuel */
+.panier-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.panier-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Détails de l'article */
+.item-desc {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.item-nom {
+  font-weight: 600;
+  color: var(--texte-fonce);
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.item-desc small {
+  color: #6c757d;
+  font-size: 0.85rem;
+  display: block;
+}
+
+/* Icône poubelle */
+.poubelle {
+  color: var(--corail);
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.poubelle:hover {
+  color: #ff4757;
+  transform: scale(1.1);
+}
+
+/* Section total */
+.total {
+  font-weight: 700;
+  color: var(--texte-fonce);
+  padding: 20px 0 10px;
+  border-top: 2px solid #eee;
+  margin-top: 15px;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Bouton de paiement */
+.btn-payer {
+  background-color: #e95a5a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.btn-payer:hover,
+.btn-payer:active {
+  background-color: #e95a5a; /* reste corail */
+  transform: scale(1.05); /* léger zoom au survol si tu veux */
+}
+
+
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recapitulatif-panier.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+
+        /* ========== SECTION PRINCIPALE ========== */
+        main {
+          padding: 2rem;
+          max-width: 1200px;
+          margin: auto;
+        }
+
+        .produit {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          padding: 1rem;
+          border-radius: 10px;
+          box-sizing: border-box;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .produit img {
+          max-width: 350px;
+          border-radius: 10px;
+        }
+
+        .produit-info {
+          flex: 1;
+        }
+
+        .produit-info h1 {
+          margin-top: 0;
+          font-size: 2rem;
+          color: #333;
+        }
+
+ .slider-container {
+          position: relative;
+          max-width: 500px;
+          height: 400px;
+      background: #f8f8f8; 
+          aspect-ratio: 1/1;
+          overflow: hidden;
+      border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+
+.reviews-wrapper {
+  padding: 0 15px; /* Réduire l'espacement latéral */
+}
+        .slider-image {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: none;
+         opacity: 0;
+  transition: opacity 0.5s;
+        }
+
+        .slider-image.active {
+          opacity: 1;
+          display: block;
+        }
+
+        .slider-navigation {
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          transform: translateY(-50%);
+          z-index: 10;
+        }
+
+        .slider-navigation button {
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+          border: none;
+          font-size: 2rem;
+          padding: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: background 0.3s;
+        }
+
+        .slider-navigation button:hover {
+          background: rgba(0, 0, 0, 0.8);
+        }
+        
+.error-message {
+  display: none;
+  color: #dc3545;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+#error-message,
+#error-color,
+#color-error {
+  display: none;
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+
+        /* ========== SECTION AVIS ========== */
+        #reviews-section {
+          position: relative;
+          padding: 2rem 0 1rem;
+          text-align: center;
+        }
+
+        .reviews-wrapper {
+          position: relative;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+
+        .reviews-container {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          padding: 1rem 0;
+          height: 250px;
+        }
+
+        .reviews-container::-webkit-scrollbar {
+          display: none;
+        }
+
+        .review-card {
+          flex: 0 0 calc(100% - 80px);
+          scroll-snap-align: center;
+          background: white;
+          border-radius: 10px;
+          padding: 15px;
+          margin: 0 40px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+        }
+
+        .review-body {
+          margin-top: 10px;
+          /* Réduit l'espacement */
+        }
+
+        .review-text {
+          font-size: 15px;
+          /* Taille de texte légèrement réduite */
+          margin-bottom: 10px;
+        }
+
+        .review-images img {
+          width: 120px;
+          height: 120px;
+        }
+.review-header {
+  margin-bottom: 4px;
+}
+
+.review-rating {
+  margin: 4px 0 8px;
+}
+
+        .arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 255, 255, 0.9);
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          z-index: 10;
+          transition: all 0.3s ease;
+        }
+
+        .arrow:hover {
+          background: #fff;
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .left-arrow {
+          left: 0;
+        }
+
+        .right-arrow {
+          right: 0;
+        }
+
+        /* ========== STYLES COMMUNS ========== */
+        .color-select {
+  position: relative; /* Pour positionnement relatif */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#color-error {
+  font-size: 1.2rem; /* Taille augmentée */
+  font-weight: bold;
+  color: #dc3545;
+  margin: 0;
+  padding: 8px 15px;
+  background: #fff3f3;
+  border-radius: 8px;
+  border: 1px solid #ffc4c4;
+  order: 2; /* Place le message en dessous sur mobile */
+}
+
+        .color-select label {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          border: 2px solid #ccc;
+          border-radius: 5px;
+          cursor: pointer;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-select input[type="radio"] {
+          display: none;
+        }
+
+        .color-select input[type="radio"]:checked+label {
+          border: 2px solid #00aaff;
+        }
+
+        .color-blanc {
+          background: #ffffff;
+        }
+
+        .color-noir {
+          background: #000000;
+        }
+
+        .color-swatch {
+  transition: transform 0.2s;
+}
+
+input:checked + .color-swatch {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px var(--corail);
+}
+
+        .prix {
+          font-size: 2.5rem;
+          font-weight: bold;
+          color: #e74c3c;
+          text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .ancien-prix {
+          font-size: 1.5rem;
+          text-decoration: line-through;
+          color: #7f8c8d;
+          margin-left: 1rem;
+        }
+
+        .boutons {
+          margin-top: 1rem;
+          display: flex;
+          align-items: center;
+        }
+
+        .boutons button {
+  background: var(--corail);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.boutons button:hover {
+  background: #e95a5a; /* couleur plus sombre pour l’hover */
+  transform: scale(1.05);
+}
+
+.boutons button:active {
+  background: #e95a5a;
+  transform: scale(1);
+}
+
+    .similaires {
+  display: flex;
+  flex-direction: row;    /* aligne en ligne */
+  flex-wrap: nowrap;      /* interdit le retour à la ligne */
+  gap: 1rem;
+  justify-content: center;/* centre le contenu (optionnel) */
+  overflow-x: auto;       /* scroll horizontal si débordement */
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+        .similaire {
+          background: white;
+          padding: 1rem;
+          border-radius: 10px;
+          width: 250px;
+          text-align: center;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .similaire img {
+          max-width: 100%;
+          border-radius: 10px;
+        }
+
+        .similaire a {
+          text-decoration: none;
+          color: #00aaff;
+          font-weight: bold;
+        }
+
+        .moyens-paiement {
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .moyens-paiement img {
+          height: 32px;
+          width: auto;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Ajoutez cette nouvelle classe */
+        .titre-similaires {
+          text-align: center;
+          margin: 0.5rem 0 1rem;
+          width: 100%;
+          font-size: 1.8rem;
+          color: #333;
+          position: relative;
+          padding: 5px 0;
+          margin: 0.5rem 0 0.5rem;
+        }
+
+       
+     /* ========== MEDIA QUERIES ========== */
+
+/* ≤ 992px */
+@media (max-width: 992px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+  .search-bar {
+    order: 3;
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+  .account-cart {
+    order: 2;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+}
+
+        @media (max-width: 768px) {
+          /* 1) Contenu principal */
+          main {
+            padding: 0 1rem !important;
+          }
+
+          /* 2) Fiche produit full-width */
+          .produit {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            gap: 1rem !important;
+          }
+          .slider-container,
+          .produit-info {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box;
+          }
+          .slider-container {
+            height: 50vw !important;
+            max-height: 300px !important;
+          }
+          .produit-info {
+            padding: 1rem !important;
+          }
+          .boutons {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          .boutons button {
+            width: 100% !important;
+            margin: 0 !important;
+          }
+
+          /* 3) Section Avis full-width + centrée */
+          #reviews-section,
+          .reviews-wrapper,
+          .reviews-container {
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            padding: 0 1rem !important;
+            box-sizing: border-box;
+            position: relative; /* nécessaire pour flèches absolues */
+          }
+          #reviews-section {
+            padding: 1.5rem 0 !important;
+          }
+          .reviews-container {
+            display: flex !important;
+            overflow-x: auto !important;
+            gap: 1rem !important;
+            padding: 0.5rem 0 !important;
+          }
+          .review-card {
+            flex: 0 0 calc(100% - 2rem) !important;
+            margin: 0 1rem !important;
+          }
+          /* Flèches centrées verticalement et alignées à 1rem des bords */
+          .reviews-wrapper .left-arrow,
+          .reviews-wrapper .right-arrow {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1.2rem !important;
+            background: rgba(255,255,255,0.9) !important;
+            border-radius: 50% !important;
+          }
+          .reviews-wrapper .left-arrow {
+            left: 1rem !important;
+          }
+          .reviews-wrapper .right-arrow {
+            right: 1rem !important;
+          }
+
+          /* 4) Section Similaires full-width + grille 2 colonnes */
+          .titre-similaires,
+          .similaires {
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            padding: 0 1rem !important;
+            box-sizing: border-box;
+          }
+          .similaires {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: space-between !important;
+            gap: 1rem !important;
+            overflow-x: hidden !important;
+          }
+          .similaire {
+            flex: 0 0 calc(50% - 0.5rem) !important;
+            margin: 0 !important;
+          }
+        }
+
+/* ≤ 576px */
+@media (max-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+  nav ul {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .account-btn,
+  .cart-btn {
+    padding: 8px 12px;
+  }
+  .produit-info h1 {
+    font-size: 1.3rem;
+  }
+  .color-select label {
+    width: 25px;
+    height: 25px;
+  }
+  .review-card {
+    flex: 0 0 calc(100% - 20px);
+    margin: 0 10px;
+  }
+}
+
+/* ≤ 480px */
+@media (max-width: 480px) {
+  .slider-container {
+    height: 70vw;
+    max-height: 300px;
+    margin: 0 5px;
+  }
+  .slider-navigation button {
+    font-size: 1.5rem;
+    padding: 5px;
+    bottom: 10px;
+  }
+}
+
+      </style>
+    </head>
+    <body>
+      <header>
+        <div class="logo">Zéphyr Store</div>
+      </header>
+        <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html#nouveautes">Nouveautés</a></li>
+      <li class="dropdown">
+        <a href="index.html#produits">Produits</a>
+        <ul class="dropdown-menu">
+          <li><a href="index.html#ventilateurs">Ventilateurs USB</a></li>
+          <li><a href="index.html#smartcup">Smart Cup</a></li>
+          <li><a href="index.html#matelas">Matelas Gonflables</a></li>
+          <li><a href="index.html#plage">Accessoires de Plage</a></li>
+          <li><a href="index.html#jeux">Jeux de Plage</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  
+    <form class="search-bar" onsubmit="event.preventDefault(); alert('Recherche : ' + this.query.value);">
+      <input type="text" name="query" placeholder="Rechercher...">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+
+    <div class="account-cart">
+      <a href="connexion.html" class="account-btn">
+  <i class="fas fa-user"></i>
+  <div class="account-text">
+    <span class="main-label">Mon compte</span>
+    <span class="sub-label">Me connecter / s'inscrire</span>
+  </div>
+</a>
+
+      <a href="javascript:void(0)" onclick="App.togglePanier(event)" class="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Mon Panier</span>
+        <span id="compteur-panier" class="cart-count">0</span>
+        </a>
+   <div class="recapitulatif-panier" id="recapitulatif-panier">
+  <ul id="liste-panier"></ul>
+  <div class="total">Total : <span id="total-panier">0.00 €</span></div>
+  <button class="btn-payer" onclick="App.payer()">Payer maintenant</button>
+</div>
+</div>
+</nav>
+
+              <main>
+        <div class="produit">
+            <div class="slider-container"></div>
+            
+            <div class="produit-info">
+                <h1 class="product-title"></h1>
+                <p class="product-description"></p>
+                <ul class="product-features"></ul>
+
+                <div class="color-select">
+                    <strong>Couleur :</strong><br>
+                    <div class="color-options"></div>
+                    <div id="color-error" class="error-message"></div>
+                </div>
+
+                <div class="prix">
+                    <span class="current-price"></span>
+                    <span class="old-price"></span>
+                </div>
+
+                <div class="boutons">
+                    <button class="btn-corail add-to-cart">Ajouter au panier</button>
+                    <button class="btn-corail">Payer maintenant</button>
+                    <div class="moyens-paiement"></div>
+                </div>
+            </div>
+
+            <section id="reviews-section">
+                <h2>Avis des clients</h2>
+                <div class="reviews-wrapper">
+                    <button class="arrow left-arrow">❮</button>
+                    <div class="reviews-container"></div>
+                    <button class="arrow right-arrow">❯</button>
+                </div>
+            </section>
+
+            <h2 class="titre-similaires">Produits similaires</h2>
+            <div class="similaires"></div>
+        </div>
+    </main>
+
+    <script src="products.js"></script>
+    <script src="product.js"></script>
+    </body>
+  </html>
